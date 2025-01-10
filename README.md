@@ -56,12 +56,33 @@ During the exploratory data analysis phase, I examined patterns and relationship
 
 This analysis helped me identify important trends and patterns, guiding the next stages of hypothesis testing and findings.
 
-
 ## Data Visualizations
 
+To better understand the patterns in the flashcard datasets, I created a series of visualizations to summarize key insights. The tools used for visualization were:
+
+- **Matplotlib & Seaborn:** For static bar charts, histograms, and scatter plots.
+- **squarify:** For treemaps.
+- **Visuals Created:**
+   - Bar charts to compare study frequency across languages.
+   - Histograms for correct vs. incorrect answers, as well as the card addition date comparisons.
+   - Line graphs showing learning progress over time.
+   - POS distribution treemaps across different languages.
+   - Heatmaps to display correlation relations betwen number of times the word was reviewed and the correct vs incorrect answers.
+   - Word clouds to indicate most correctly vs incorrectly answered words in each language.
+
+
 ## Findings
+Key insights:
+- Consistent review leads to higher accuracy.
+- POS distribution affects study patterns across languages.
+
 
 ## Limitations
+There were several challenges I faced along the way.
+- Mobile app data extraction: As the creator of the app did not supply progress data extraction, I had to automate Appium scripts to do it and due to my unfamiliarity with this setup, there might have been some errors with exporting the data. There were also more detailed progress reports on the app but since their UI was much more complex, I didn't have the expertise to extract and use them in the project.
+- POS tagging: Due to stanza only perceiving the first word of the target word, there were some errors with POS tagging, which I had to fix manually. For example, for a German noun, it registered it as a "determiner" due to the article of the noun.
+- Korean font: Some modules are not compatible with the Korean alphabet, so there were some adjustments needed to the codes. For example I could not generate a word cloud for lowest and highest accuracy rated Korean words beacuse it refused to process the Korean characters. You can see the example on "EDA_on_accuracy.ipynb".
+- No external validation of learning effectiveness: The results of my flashcard analysis were not compared or validated against other independent sources to confirm if the observed trends actually reflect real learning progress. The analysis relies only on in-app performance, which is not enough for a full analysis of language learning habits.
 
 ## Future Work
 
