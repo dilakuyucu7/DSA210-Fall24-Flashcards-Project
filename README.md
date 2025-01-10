@@ -100,9 +100,10 @@ I have 2 hypotheses:
 
 
 ### Other Key Insights
-- **Accuracy Comparison:**
-- **POS Comparison:**
-- 
+- **Accuracy Comparison:** Korean Mean Accuracy Rate is 0.88, German Mean Accuracy Rate is 0.95, Italian Mean Accuracy Rate is 0.83. Overall, I have a slightly better accuracy rate with German, though all of them are close.
+- **POS Comparison:** Propositions had the highest accuracy rate among all other parts of speech, closely followed by nouns and adjectives. Surprisingly, verbs ranked fifth.
+- **Study Frequency Comparison:** Once again, German has the highest average study frequency with 11.86. It's a significant increase compared to other two, which are 5.38 and 5.64, with Italian and Korean respectively.
+- **Date Analysis:** My most active day was May 2024, with 41 new cards added. My most active month was July 2024, and most active day of the week was, though by a small margin, Wednesday.
 
 
 ## Limitations
