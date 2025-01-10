@@ -75,6 +75,17 @@ To better understand the patterns in the flashcard datasets, I created a series 
 
 
 ## Findings
+### Hypothesis Testing
+I have 2 hypotheses:
+
+1. Null hypothesis: The average accuracy level for verbs is equal to that for nouns.  
+   Alternative hypothesis: The average accuracy level for verbs is higher than that for nouns.
+   The calculations for the accuracy level for verbs vs nouns can be seen [in this boxplot](./hypothesis_test_1.ipynb). It clearly shows that nouns have a higher median and tighter accuracy distribution.
+   
+
+3. Null Hypothesis: There is no correlation between the date added and accuracy level.  
+   Alternative Hypothesis: Earlier cards have a higher accuracy level than recently added cards.
+   
 Key insights:
 - Consistent review leads to higher accuracy.
 - POS distribution affects study patterns across languages.
