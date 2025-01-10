@@ -38,13 +38,24 @@ The languages I study are Korean, German and predominantly, Italian. The sudden 
 - **Jupyter Notebook** (for interactive analysis)
 
 ## Dataset and Data Processing
-There are 2 important datasets. The first one is my "flashcard data". I pulled this one from the Flashcards World app directly as a CSV file from every set. The CSV file contains the target word in my target language and its translation into English.
+There are 2 important datasets. The first one is my "flashcard data". I pulled this one from the Flashcards World app directly as a CSV file from every set, which the app offers. The CSV file contains the target word in my target language and its translation into English.
 
-The second dataset is "progress data". As this data was unexportable, I automated an Appium script to pull it from the mobile app, which is given above. I first logged them as a text file, and then cleaned them to obtain a complete CSV file. It contains the target word, the date that card was added, the number of times it was studied, and my correct and incorrect answers. 
+The second dataset is "progress data". As this data was unexportable, I automated an Appium script to pull it from the mobile app, which is given above in "appium_mobile_app_scraping.ipynb". I first logged them as a text file, and then cleaned them to obtain a complete CSV file. It contains the target word, the date that card was added, the number of times it was studied, and my correct and incorrect answers. 
 
-To add the Parts of Speech tagging, I used stanza on the raw CSV files and merged them with my Progress Data to create a complete dataset. The code is given above. 
+To add the Parts of Speech (POS) tagging, I used stanza on the raw CSV files and merged them with my Progress Data to create a complete dataset. The parts of speech tags include NOUN, VERB, ADJ, ADV etc. The code is given above in "pos_tagging.ipynb". 
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis  
+
+During the exploratory data analysis phase, I examined patterns and relationships within the flashcard datasets for Korean, German, and Italian. Key steps included:
+
+- **Data Cleaning:** Handled missing values and ensured data consistency across datasets.
+- **Descriptive Statistics:** Calculated summary statistics for study frequency, accuracy, and POS distribution.
+- **Visualizations:** Generated bar charts, histograms, and scatter plots to identify trends such as the correlation between the number of times studied and accuracy.
+- **POS Tagging Analysis:** Explored how different parts of speech affect retention and correctness in language learning.
+- **Language Comparisons:** Compared accuracy and study frequency across the three languages.
+
+This analysis helped me identify important trends and patterns, guiding the next stages of hypothesis testing and findings.
+
 
 ## Data Visualizations
 
