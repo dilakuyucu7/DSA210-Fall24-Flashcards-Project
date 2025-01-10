@@ -85,6 +85,9 @@ There were several challenges I faced along the way.
 - No external validation of learning effectiveness: The results of my flashcard analysis were not compared or validated against other independent sources to confirm if the observed trends actually reflect real learning progress. The analysis relies only on in-app performance, which is not enough for a full analysis of language learning habits.
 
 ## Future Work
+- Expand the dataset for more languages in the future, or expand my datasets for the existing languages, German and Korean, especially.
+- Create a website to track my full language learning journey.
+- Automate and further develop Appium scripts to tackle the more complex progress data UI.
 
 
 
