@@ -1,6 +1,7 @@
 # DSA210-Fall24-Flashcards-Project
 ## Description  
 Please head over to this presentation for detailed analysis after reading this README. [Download the Flashcards Presentation](./flashcards%20presentation.pptx)
+(Please click "view raw" if you cannot see the presentation).
 
 My term project for Sabanci University Fall 2024-2025 DSA210 Introduction to Data Science course. In this project, I analyze my language learning habits through my Flashcards World mobile app data.  
 
