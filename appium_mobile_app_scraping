@@ -1,0 +1,117 @@
+#scrolls but with mistakes, use this
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from appium.options.common import AppiumOptions
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import unittest
+import time
+
+class FlashcardsWorld(unittest.TestCase):
+    def setUp(self) -> None:
+        options = AppiumOptions()
+        options.set_capability("platformName", "Android")
+        options.set_capability("automationName", "uiautomator2")
+        options.set_capability("deviceName", "Android")
+        options.set_capability("appPackage", "flashcards.words.words")
+        options.set_capability("appActivity", ".ui.base.SplashActivity")
+        options.set_capability("noReset", True)
+
+        self.driver = webdriver.Remote("http://localhost:4723", options=options)
+
+    def tearDown(self) -> None:
+        if self.driver:
+            self.driver.quit()
+
+    def test_capture_progress_data(self) -> None:
+        self.driver.implicitly_wait(10)
+        processed_words = set()
+        
+        while True:
+            # ✅ Re-fetch elements on each iteration to avoid stale reference
+            cards_on_screen = self.driver.find_elements(AppiumBy.ID, "flashcards.words.words:id/card_term")
+
+            if not cards_on_screen:
+                print("🚨 No cards detected on the screen. Exiting test.")
+                break
+
+            for index in range(len(cards_on_screen)):
+                try:
+                    # ✅ Re-fetch elements for each iteration to avoid stale reference
+                    cards_on_screen = self.driver.find_elements(AppiumBy.ID, "flashcards.words.words:id/card_term")
+                    card = cards_on_screen[index]  # Fetch the card again
+                    word_text = card.text.strip()
+
+                    if not word_text or word_text in processed_words:
+                        continue
+
+                    processed_words.add(word_text)
+                    print(f"\n✅ Processing: {word_text}")
+
+                    # ✅ Click the 3-dot button for the CURRENT card (ensure elements are re-fetched)
+                    three_dot_buttons = self.driver.find_elements(AppiumBy.ID, "flashcards.words.words:id/overflow")
+                    if index >= len(three_dot_buttons):
+                        print(f"❌ Skipping {word_text}, three-dot button not accessible.")
+                        continue
+                    three_dot_buttons[index].click()
+
+                    # ✅ Click the "Progress" button using dynamic fetching
+                    progress_button = WebDriverWait(self.driver, 10).until(
+                        EC.presence_of_element_located(
+                            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Progress")')
+                        )
+                    )
+                    progress_button.click()
+
+                    # ✅ Wait for the progress popup to load and dynamically fetch the elements
+                    WebDriverWait(self.driver, 5).until(
+                        EC.presence_of_element_located((AppiumBy.ID, "flashcards.words.words:id/date"))
+                    )
+
+                    # ✅ Check for "Studied: 0" and handle it accordingly
+                    card_added = self.driver.find_element(AppiumBy.ID, "flashcards.words.words:id/date").text
+                    studied_text = self.driver.find_element(AppiumBy.ID, "flashcards.words.words:id/reviews_completed").text
+                    
+                    # ✅ Handling the case where no reviews exist
+                    if "0" in studied_text:
+                        progress_data = {
+                            "Card was added": card_added,
+                            "Studied": studied_text,
+                            "Correct answers": "Not Available",
+                            "Incorrect answers": "Not Available"
+                        }
+                    else:
+                        progress_data = {
+                            "Card was added": card_added,
+                            "Studied": studied_text,
+                            "Correct answers": self.driver.find_element(AppiumBy.ID, "flashcards.words.words:id/correct_answers").text,
+                            "Incorrect answers": self.driver.find_element(AppiumBy.ID, "flashcards.words.words:id/incorrect_answers").text
+                        }
+
+                    # ✅ Save progress data to a separate file
+                    with open("flashcards_progress_log.txt", "a", encoding="utf-8") as file:
+                        file.write(f"\nWord: {word_text}\nProgress Data: {progress_data}\n")
+
+                    print(f"✅ Data Captured for {word_text}: {progress_data}")
+
+                    # ✅ Close the progress popup and wait for stability
+                    self.driver.back()
+                    time.sleep(1)
+
+                except Exception as e:
+                    print(f"❌ Error processing {word_text}: {e}")
+
+            # ✅ Scroll for new cards if needed
+            print("🚨 Scrolling down for new cards...")
+            window_size = self.driver.get_window_size()
+            self.driver.swipe(
+                start_x=window_size["width"] // 2,
+                start_y=int(window_size["height"] * 0.8),
+                end_x=window_size["width"] // 2,
+                end_y=int(window_size["height"] * 0.2),
+                duration=1000
+            )
+            time.sleep(2)  # Allow time for cards to refresh
+
+if __name__ == "__main__":
+    unittest.main(argv=["first-arg-is-ignored"], exit=False)
