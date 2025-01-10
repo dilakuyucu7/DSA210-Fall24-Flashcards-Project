@@ -45,7 +45,7 @@ There are 2 important datasets. The first one is my "flashcard data". I pulled t
 
 The second dataset is "progress data". As this data was unexportable, I automated an Appium script to pull it from the mobile app, which is given above in "appium_mobile_app_scraping.ipynb". I first logged them as a text file, and then cleaned them to obtain a complete CSV file. It contains the target word, the date that card was added, the number of times it was studied, and my correct and incorrect answers. 
 
-To add the Parts of Speech (POS) tagging, I used stanza on the raw CSV files and merged them with my Progress Data to create a complete dataset. The parts of speech tags include NOUN, VERB, ADJ, ADV etc. The code is given above in "pos_tagging.ipynb". 
+To add the Parts of Speech (POS) tagging, I used the stanza library on the raw CSV files and merged them with my Progress Data to create a complete dataset. The parts of speech tags include NOUN, VERB, ADJ, ADV etc. The code is given above in "pos_tagging.ipynb". 
 
 ## Exploratory Data Analysis  
 
@@ -80,14 +80,27 @@ I have 2 hypotheses:
 
 1. Null hypothesis: The average accuracy level for verbs is equal to that for nouns.  
    Alternative hypothesis: The average accuracy level for verbs is higher than that for nouns.
-   The calculations for the accuracy level for verbs vs nouns can be seen [in this boxplot](./hypothesis_test_1.ipynb). It clearly shows that nouns have a higher median and tighter accuracy distribution.
+   
+   The calculations for the accuracy level for verbs vs nouns can be seen [in this boxplot](./hypothesis_test_1.ipynb). It clearly shows that nouns have a higher median and tighter accuracy distribution, and that nouns reach 100% accuracy more frequently compared to verbs. While the spread for verbs is wider, with lower accuracy values appearing more often. (Mean Accuracy for Verbs: 0.82, Mean Accuracy for Nouns: 0.88).
+
+   Applying the 2 sided t-test, I got the following values:
+   T-statistic: -4.4538  
+   P-value: 9.3082e-06  
+   So, we reject the null hypothesis: There is a significant difference between verbs' and nouns' accuracy.
    
 
 3. Null Hypothesis: There is no correlation between the date added and accuracy level.  
    Alternative Hypothesis: Earlier cards have a higher accuracy level than recently added cards.
-   
-Key insights:
-- Consistent review leads to higher accuracy.
+
+   I used Spearman correlation for this data. Spearmen coefficient indicates a weak negative correlation between the date a flashcard was added and the accuracy level. This suggests that newer flashcards tend to have slightly higher accuracy compared to older ones. The p-value is extremely low, much smaller than the typical significance level of 0.05.  
+
+   Spearman's Correlation Coefficient: -0.1703  
+   P-value: 0.0000  
+   We reject the null hypothesis: Significant correlation exists between date added and accuracy.
+
+
+### Other Key Insights
+- **Accuracy Comparison:**
 - POS distribution affects study patterns across languages.
 
 
