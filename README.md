@@ -92,7 +92,7 @@ I have 2 hypotheses:
 3. Null Hypothesis: There is no correlation between the date added and accuracy level.  
    Alternative Hypothesis: Earlier cards have a higher accuracy level than recently added cards.
 
-   I used Spearman correlation for this data. Spearmen coefficient indicates a weak negative correlation between the date a flashcard was added and the accuracy level. This suggests that newer flashcards tend to have slightly higher accuracy compared to older ones. The p-value is extremely low, much smaller than the typical significance level of 0.05.  
+   I used Spearman correlation for this data. [See here for accuracy scatter plot](./hypo2_scatter.png). Spearmen coefficient indicates a weak negative correlation between the date a flashcard was added and the accuracy level. This suggests that newer flashcards tend to have slightly higher accuracy compared to older ones. The p-value is extremely low, much smaller than the typical significance level of 0.05.  
 
    Spearman's Correlation Coefficient: -0.1703  
    P-value: 0.0000  
@@ -101,7 +101,8 @@ I have 2 hypotheses:
 
 ### Other Key Insights
 - **Accuracy Comparison:**
-- POS distribution affects study patterns across languages.
+- **POS Comparison:**
+- 
 
 
 ## Limitations
